@@ -27,9 +27,9 @@ for (let i = 0; i < castList.length; i++) {
 
   if (castList[i].age < 30) {
     document.write(
-      castName + " (age " + castAge + ")" + " -Wow, still just a baby! <br />" // separates characters under age 30
+      `${castName}${" (age "}${castAge}${")"}${" -Wow, still just a baby!"}${"<br />"}`
     );
   } else {
-    document.write(castName + " (age " + castAge + ")" + "<br />"); // all characters over age 30
+    document.write(`${castName}${" (age "}${castAge}${")"}${"<br />"}`);
   }
 }
