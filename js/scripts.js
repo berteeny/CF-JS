@@ -20,3 +20,16 @@ let castList = [
     types: ["tall", "twitchy"],
   },
 ];
+
+for (let i = 0; i < castList.length; i++) {
+  let castAge = castList[i].age;
+  let castName = castList[i].name;
+
+  if (castList[i].age < 30) {
+    document.write(
+      castName + " (age " + castAge + ")" + " -Wow, still just a baby! <br />" // separates characters under age 30
+    );
+  } else {
+    document.write(castName + " (age " + castAge + ")" + "<br />"); // all characters over age 30
+  }
+}
