@@ -34,15 +34,23 @@ let characterRepository = (function () {
     }
   }
 
+  function addListItem(character) {
+    let castList = document.querySelector(".cast-list");
+    let listItem = document.createElement("li");
+    let button = document.createElement("button");
+    button.innerText = character.name;
+    button.classList.add("btn");
+    listItem.appendChild(button);
+    castList.appendChild(listItem);
+  }
+
   return {
     getAll: getAll,
     add: add,
+    addListItem: addListItem,
   };
 })();
 
-// writes character name and age in document
 characterRepository.getAll().forEach(function (character) {
-  document.write(
-    `${character.name}${" (age "}${character.age}${")"}${"<br />"}`
-  );
+  characterRepository.addListItem(character);
 });
