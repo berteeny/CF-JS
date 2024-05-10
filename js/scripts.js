@@ -21,15 +21,9 @@ let castList = [
   },
 ];
 
-for (let i = 0; i < castList.length; i++) {
-  let castAge = castList[i].age;
-  let castName = castList[i].name;
-
-  if (castList[i].age < 30) {
-    document.write(
-      `${castName}${" (age "}${castAge}${")"}${" -Wow, still just a baby!"}${"<br />"}`
-    );
-  } else {
-    document.write(`${castName}${" (age "}${castAge}${")"}${"<br />"}`);
-  }
-}
+// writes character's name + age in document
+castList.forEach(function (character) {
+  document.write(
+    `${character.name}${" (age "}${character.age}${")"}${"<br />"}`
+  );
+});
