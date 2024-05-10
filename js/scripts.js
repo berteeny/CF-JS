@@ -27,7 +27,11 @@ let characterRepository = (function () {
   }
 
   function add(castMember) {
-    castList.push(castMember);
+    if (typeof castMember !== "object") {
+      return "Not an Object";
+    } else {
+      castList.push(castMember);
+    }
   }
 
   return {
@@ -36,7 +40,7 @@ let characterRepository = (function () {
   };
 })();
 
-// writes charatcer name and age in document
+// writes character name and age in document
 characterRepository.getAll().forEach(function (character) {
   document.write(
     `${character.name}${" (age "}${character.age}${")"}${"<br />"}`
