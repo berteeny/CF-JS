@@ -42,6 +42,18 @@ let characterRepository = (function () {
     button.classList.add("btn");
     listItem.appendChild(button);
     castList.appendChild(listItem);
+    addHandler(button, character); //add event handler to button
+  }
+
+  //listen for clicks on button and call showDetails function for character who's button was clicked
+  function addHandler(button, character) {
+    button.addEventListener("click", function () {
+      showDetails(character);
+    });
+  }
+
+  function showDetails(character) {
+    console.log(character);
   }
 
   return {
