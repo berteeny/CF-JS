@@ -1,68 +1,95 @@
-let characterRepository = (function () {
-  let castList = [
-    {
-      name: "George",
-      age: 31,
-      types: ["bald", "unemployed"],
-    },
-    {
-      name: "Elaine",
-      age: 27,
-      types: ["loud", "curly"],
-    },
-    {
-      name: "Jerry",
-      age: 35,
-      types: ["funny", "single"],
-    },
-    {
-      name: "Kramer",
-      age: 39,
-      types: ["tall", "twitchy"],
-    },
-  ];
+let pokemonRepository = (function () {
+  let pokemonList = [];
+  let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
 
   function getAll() {
-    return castList;
+    return pokemonList;
   }
 
-  function add(castMember) {
-    if (typeof castMember !== "object") {
+  function add(pokemon) {
+    if (typeof pokemon !== "object") {
       return "Not an Object";
     } else {
-      castList.push(castMember);
+      pokemonList.push(pokemon);
     }
   }
 
-  function addListItem(character) {
-    let castList = document.querySelector(".cast-list");
+  function addListItem(pokemon) {
+    let pokeList = document.querySelector(".poke-list");
     let listItem = document.createElement("li");
     let button = document.createElement("button");
-    button.innerText = character.name;
+    button.innerText = pokemon.name;
     button.classList.add("btn");
     listItem.appendChild(button);
-    castList.appendChild(listItem);
-    addHandler(button, character); //add event handler to button
+    pokeList.appendChild(listItem);
+    addHandler(button, pokemon); //add event handler to button
   }
 
-  //listen for clicks on button and call showDetails function for character who's button was clicked
-  function addHandler(button, character) {
+  //listen for clicks on button and call showDetails function for pokemon whose button was clicked
+  function addHandler(button, pokemon) {
     button.addEventListener("click", function () {
-      showDetails(character);
+      showDetails(pokemon);
     });
   }
 
-  function showDetails(character) {
-    console.log(character);
+  // function showDetails(pokemon) {
+  //   console.log(pokemon);
+  // }
+
+  function loadList() {
+    return fetch(apiUrl)
+      .then(function (response) {
+        console.log(response);
+        return response.json();
+      })
+      .then(function (json) {
+        json.results.forEach(function (item) {
+          let pokemon = {
+            name: item.name,
+            detailsUrl: item.url,
+          };
+          add(pokemon);
+        });
+      })
+      .catch(function (e) {
+        console.error(e);
+      });
+  }
+  
+  function loadDetails(item) {
+    let url = item.detailsUrl;
+    return fetch(url)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (details) {
+        item.imageUrl = details.sprites.front_default;
+        item.height = details.height;
+        item.types = details.types;
+      })
+      .catch(function (e) {
+        console.error(e);
+      });
+  }
+
+  function showDetails(pokemon) {
+    pokemonRepository.loadDetails(pokemon).then(function () {
+      console.log(pokemon);
+    });
   }
 
   return {
     getAll: getAll,
     add: add,
     addListItem: addListItem,
+    loadList: loadList,
+    loadDetails: loadDetails,
+    showDetails: showDetails,
   };
 })();
 
-characterRepository.getAll().forEach(function (character) {
-  characterRepository.addListItem(character);
+pokemonRepository.loadList().then(function () {
+  pokemonRepository.getAll().forEach(function (pokemon) {
+    pokemonRepository.addListItem(pokemon);
+  });
 });
