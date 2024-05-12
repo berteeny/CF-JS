@@ -32,10 +32,6 @@ let pokemonRepository = (function () {
     });
   }
 
-  // function showDetails(pokemon) {
-  //   console.log(pokemon);
-  // }
-
   function loadList() {
     return fetch(apiUrl)
       .then(function (response) {
@@ -55,7 +51,7 @@ let pokemonRepository = (function () {
         console.error(e);
       });
   }
-  
+
   function loadDetails(item) {
     let url = item.detailsUrl;
     return fetch(url)
@@ -75,8 +71,62 @@ let pokemonRepository = (function () {
   function showDetails(pokemon) {
     pokemonRepository.loadDetails(pokemon).then(function () {
       console.log(pokemon);
+      showModal(pokemon.name, pokemon.height, pokemon.imageUrl);
     });
   }
+
+  function showModal(name, description1, imageUrl) {
+    let modalContainer = document.querySelector("#modal-container");
+
+    // Clear all current modal content
+    modalContainer.innerHTML = "";
+
+    let modal = document.createElement("div");
+    modal.classList.add("modal");
+
+    let closeButton = document.createElement("button");
+    closeButton.classList.add("modal-close");
+    closeButton.innerText = "Close";
+    closeButton.addEventListener("click", () => {
+      closeModal();
+    });
+
+    let titleElement = document.createElement("h1");
+    titleElement.innerText = name;
+
+    let content = document.createElement("p");
+    content.innerText = "Height: " + description1;
+
+    let pokeImg = document.createElement("img");
+    pokeImg.src = imageUrl;
+
+    modal.appendChild(closeButton);
+    modal.appendChild(titleElement);
+    modal.appendChild(content);
+    modal.appendChild(pokeImg);
+    modalContainer.appendChild(modal);
+
+    modalContainer.classList.add("visible");
+
+    modalContainer.addEventListener("click", (e) => {
+      let target = e.target;
+      if (target === modalContainer) {
+        closeModal();
+      }
+    });
+  }
+
+  function closeModal() {
+    let modalContainer = document.querySelector("#modal-container");
+    modalContainer.classList.remove("visible");
+  }
+
+  window.addEventListener("keydown", (e) => {
+    let modalContainer = document.querySelector("#modal-container");
+    if (e.key === "Escape" && modalContainer.classList.contains("visible")) {
+      closeModal();
+    }
+  });
 
   return {
     getAll: getAll,
