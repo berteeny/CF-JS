@@ -18,8 +18,11 @@ let pokemonRepository = (function () {
     let pokeList = document.querySelector(".poke-list");
     let listItem = document.createElement("li");
     let button = document.createElement("button");
+    listItem.classList.add("list-group-item");
     button.innerText = pokemon.name;
     button.classList.add("btn");
+    button.classList.add("btn-primary");
+    button.setAttribute("data-target", "#modal-container");
     listItem.appendChild(button);
     pokeList.appendChild(listItem);
     addHandler(button, pokemon); //add event handler to button

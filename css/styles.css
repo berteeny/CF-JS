@@ -3,9 +3,8 @@ body {
 }
 
 .btn {
-  background-color: lightgrey;
+  background-color: darkgreen;
   border: none;
-  border-bottom: solid darkgray 2px;
   border-radius: 2%;
   width: 200px;
   height: 60px;
@@ -73,4 +72,14 @@ li {
   background: none;
   color: darkmagenta;
   text-decoration: none;
+}
+
+.navP {
+  color: rgb(49, 64, 24);
+  font-family: Serif;
+  font-size: 2rem;
+}
+
+.navbar {
+  margin-bottom: 30px;
 }
