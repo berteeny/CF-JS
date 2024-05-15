@@ -55,15 +55,12 @@ li {
   align-items: center;
 }
 
-.modal {
-  margin: auto;
-  display: inline-block;
-  box-sizing: border-box;
-  background: #fff;
-  padding: 15px;
-  width: 100%;
-  max-width: 700px;
+.modal-body {
   text-align: center;
+}
+
+.img {
+  justify-content: center;
 }
 
 .modal-close {
@@ -82,4 +79,8 @@ li {
 
 .navbar {
   margin-bottom: 30px;
+}
+
+.pokeImg {
+  width: 200px;
 }
