@@ -6,7 +6,7 @@ This project is an online Pokedex (Pocket Monsters) app that fetches data from t
 
 - **Pokemon Repository:** A repository is created from the details of the API that are fetched using Javascript and displayed as button elements.
 
-- **Pokemon Details:** CLicking a Pokemon button opens a modal built with Bootstrap that displays details sucha s the Pokemon's name, height, weight, and image.
+- **Pokemon Details:** Clicking a Pokemon button opens a modal built with Bootstrap that displays details sucha s the Pokemon's name, height, weight, and image.
 
 ### JavaScript ES6
 
